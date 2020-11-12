@@ -1,11 +1,19 @@
 package main
 
 import (
-	"fmt"
 	"monitor/configs"
+	"monitor/utils/logger"
 )
 
+func init() {
+	initMonitor()
+}
+
 func main() {
+
+}
+
+func initMonitor() {
 	configs.InitConfig()
-	fmt.Println(configs.GetDbConfig())
+	logger.InitLogger()
 }

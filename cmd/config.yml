@@ -1,4 +1,10 @@
+app:
+  name: monitor
+  debug: true
+  env: release
+  log_path: .
 db:
+  enable: true
   engine: mysql
   host: 127.0.0.1
   port: 3306

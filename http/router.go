@@ -1,5 +1,5 @@
 package http
 
-func initRouter() {
+func InitRouter() {
 
 }
