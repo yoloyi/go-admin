@@ -1,15 +1,16 @@
-package logger
+package initialize
 
 import (
 	rotatelogs "github.com/lestrrat/go-file-rotatelogs"
 	"github.com/rifflock/lfshook"
 	log "github.com/sirupsen/logrus"
-	"monitor/configs"
+	"monitor/internal/configs"
 	"path"
 	"time"
 )
 
-func InitLogger() {
+// 初始化日志方法
+func initLogger() {
 	if configs.GetAppConfig().GetDebug() {
 		log.SetLevel(log.TraceLevel)
 	} else {

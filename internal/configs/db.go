@@ -1,7 +1,6 @@
 package configs
 
 type IDbConfig interface {
-	GetDbEnable() bool
 	GetDbEngine() string
 	getDbHost() string
 	getDbPort() int
@@ -15,7 +14,6 @@ type IDbConfig interface {
 }
 
 type DbConfig struct {
-	Enable       bool   `yaml: "enable"`
 	Engine       string `yaml: "engine"`
 	Host         string `yaml: "host"`
 	Port         int    `yaml: "port"`
@@ -26,10 +24,6 @@ type DbConfig struct {
 	Charset      string `yaml: "charset"`
 	MaxIdleConns int    `yaml: "maxidleconns"`
 	MaxOpenConns int    `yaml: "maxopenconns"`
-}
-
-func (d *DbConfig) GetDbEnable() bool {
-	return d.Enable
 }
 
 func (d *DbConfig) GetDbEngine() string {
