@@ -12,5 +12,6 @@ db:
   database: monitor
   prefix:
   charset: utf8mb4
+  loc: Asia/Shanghai
   maxidleconns: 20
   maxopenconns: 50

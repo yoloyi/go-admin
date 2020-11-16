@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"flag"
+	"monitor/internal/models"
 	"sync"
 )
 
@@ -17,5 +18,6 @@ func InitApp() {
 	once.Do(func() {
 		initConfigYml()
 		initLogger()
+		models.SetUp()
 	})
 }

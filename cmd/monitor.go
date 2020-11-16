@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
 	"monitor/internal/initialize"
+	"monitor/internal/models"
 )
 
 func init() {
@@ -10,6 +10,6 @@ func init() {
 }
 
 func main() {
-	logrus.Warn(123)
+	models.Test()
 
 }
