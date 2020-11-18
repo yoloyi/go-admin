@@ -2,7 +2,6 @@ package main
 
 import (
 	"monitor/internal/initialize"
-	"monitor/internal/models"
 )
 
 func init() {
@@ -10,6 +9,4 @@ func init() {
 }
 
 func main() {
-	models.Test()
-
 }

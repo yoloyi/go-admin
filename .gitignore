@@ -2,3 +2,4 @@
 tests/*
 ./main
 *.log
+vendor/*
