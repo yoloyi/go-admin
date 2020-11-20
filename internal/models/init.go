@@ -8,17 +8,14 @@ import (
 	"gorm.io/gorm/schema"
 	"monitor/internal/configs"
 	"net/url"
+	"sync"
 	"time"
 )
 
-var db *gorm.DB
-
-type BaseModel struct {
-	ID        uint           `gorm:"primary_key;column:id;type:int(10) unsigned;not null"`        // 主键
-	CreatedAt time.Time      `gorm:"column:created_time;type:datetime"`                             // 创建时间
-	UpdatedAt time.Time      `gorm:"column:updated_time;type:datetime"`                             // 修改时间
-	DeletedAt gorm.DeletedAt `gorm:"index:idx_deleted_time;column:deleted_time;type:datetime;null"` // 删除时间
-}
+var (
+	db *gorm.DB
+	m  sync.RWMutex
+)
 
 // Init db
 func SetUp() {
@@ -41,10 +38,21 @@ func SetUp() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	// Set db pool config
 	sqlDb.SetConnMaxLifetime(time.Hour)
 	sqlDb.SetMaxIdleConns(configs.GetDbConfig().GetDbMaxIdleConns())
 	sqlDb.SetMaxOpenConns(configs.GetDbConfig().GetDbMaxOpenConns())
+}
+
+// GetDB Get Gorm Db
+func GetDB() *gorm.DB {
+	if db == nil {
+		m.Lock()
+		SetUp()
+		m.Unlock()
+	}
+	return db
 }
 
 func getDsn() string {

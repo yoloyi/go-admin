@@ -5,6 +5,7 @@ type IAppConfig interface {
 	GetEnv() string
 	GetLogPath() string
 	GetName() string
+	GetPort() int16
 }
 
 type AppConfig struct {
@@ -12,6 +13,7 @@ type AppConfig struct {
 	Env     string `yaml:"env"`
 	LogPath string `yaml:"log_path"`
 	Name    string `yaml:"name"`
+	Port    int16  `yaml:"port"`
 }
 
 func (a *AppConfig) GetDebug() bool {
@@ -27,4 +29,8 @@ func (a *AppConfig) GetLogPath() string {
 }
 func (a *AppConfig) GetName() string {
 	return a.Name
+}
+
+func (a *AppConfig) GetPort() int16 {
+	return a.Port
 }

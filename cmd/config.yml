@@ -1,8 +1,9 @@
 app:
   name: monitor
-  debug: true
+  debug: false
   env: release
   log_path: .
+  port: 8000
 db:
   engine: mysql
   host: 127.0.0.1
