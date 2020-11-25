@@ -2,7 +2,6 @@ package main
 
 import (
 	"monitor/internal/initialize"
-	"monitor/internal/routers"
 )
 
 func init() {
@@ -10,5 +9,5 @@ func init() {
 }
 
 func main() {
-	routers.RunHttp()
+	//routers.RunHttp()
 }

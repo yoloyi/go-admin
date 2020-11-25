@@ -1,4 +1,4 @@
-package models
+package entities
 
 // Users 后台用户表
 type Users struct {

@@ -2,10 +2,10 @@ package models
 
 import (
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+	"log"
 	"monitor/internal/configs"
 	"net/url"
 	"sync"
@@ -14,11 +14,13 @@ import (
 
 var (
 	db *gorm.DB
-	m  sync.RWMutex
+	m  sync.Mutex
 )
 
 // Init db
 func SetUp() {
+	m.Lock()
+	defer m.Unlock()
 	dsn := getDsn()
 	var err error
 
@@ -48,9 +50,7 @@ func SetUp() {
 // GetDB Get Gorm Db
 func GetDB() *gorm.DB {
 	if db == nil {
-		m.Lock()
 		SetUp()
-		m.Unlock()
 	}
 	return db
 }
