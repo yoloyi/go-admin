@@ -1,8 +1,8 @@
 app:
   name: monitor
-  debug: false
-  env: release
-  log_path: .
+  debug: true
+  env: local    # local, release, test
+  log_path: ./cmd
   port: 8000
 db:
   engine: mysql

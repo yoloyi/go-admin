@@ -15,21 +15,29 @@ import (
 )
 
 func initRouter() *gin.Engine {
-	if !configs.GetAppConfig().GetDebug() {
+
+	// 当 env 不为 release 则统一为 debug 环境
+	if configs.GetAppConfig().GetEnv() != gin.ReleaseMode {
+		gin.SetMode(gin.DebugMode)
+	} else {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
 	var router = gin.Default()
-	router.Use(gin.Logger(), gin.Recovery())
 	log.Printf("【App】use middleware cors\n")
 	router.Use(middleware.Cors())
 	log.Printf("Init middleware cors success\n")
-
-	routerGroup := router.Group("")
-	// Register user Router
-	handlers.RegisterUserRouter(routerGroup)
+	registerRouter(router)
 	return router
 
+}
+
+// registerRouter register router handler
+func registerRouter(router *gin.Engine) {
+	routerGroup := router.Group("")
+
+	handlers.RegisterAuthRouter(routerGroup)
+	handlers.RegisterUserRouter(routerGroup)
 }
 
 func RunHttp() {
@@ -49,7 +57,7 @@ func RunHttp() {
 
 	// 等待中断信号以优雅地关闭服务器（设置 5 秒的超时时间）
 	quit := make(chan os.Signal)
-	signal.Notify(quit, os.Interrupt)
+	signal.Notify(quit, os.Interrupt, os.Kill)
 	<-quit
 	log.Println("Shutdown Server ...")
 

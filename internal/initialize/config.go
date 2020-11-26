@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	configPath = flag.String("config", "./config.yml", "配置文件路径")
+	configPath = flag.String("c", "./config.yml", "配置文件路径")
 )
 
 // 初始化配置文件

@@ -7,12 +7,14 @@ package services
 
 import (
 	"monitor/internal/models"
+	"monitor/internal/models/repositories"
 )
 
 // Injectors from wire.go:
 
-func NewUserService() *user {
+func NewAuthService() *auth {
 	db := models.GetDB()
-	servicesUser := newUser(db)
-	return servicesUser
+	user := repositories.NewUser(db)
+	servicesAuth := newAuthService(user)
+	return servicesAuth
 }

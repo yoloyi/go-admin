@@ -2,9 +2,12 @@
 
 package services
 
-import "github.com/google/wire"
+import (
+	"github.com/google/wire"
+	"monitor/internal/models/repositories"
+)
 
-func NewUserService() *user {
-	wire.Build(userServiceSet)
-	return &user{}
+func NewAuthService() *auth {
+	wire.Build(AuthServiceWireSet, repositories.UserRepositoryWireSet)
+	return &auth{}
 }
