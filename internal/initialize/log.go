@@ -4,7 +4,7 @@ import (
 	rotatelogs "github.com/lestrrat/go-file-rotatelogs"
 	"github.com/rifflock/lfshook"
 	log "github.com/sirupsen/logrus"
-	"monitor/internal/configs"
+	"go-admin/internal/configs"
 	"path"
 	"time"
 )

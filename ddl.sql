@@ -1,6 +1,3 @@
-CREATE DATABASE IF NOT EXISTS monitor DEFAULT CHAR SET utf8mb4 COLLATE utf8mb4_general_ci;
-use monitor;
-
 CREATE TABLE m_users
 (
     id           INT UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '主键',
@@ -17,4 +14,4 @@ CREATE TABLE m_users
   collate utf8mb4_general_ci COMMENT '后台用户表';
 
 -- 插入默认用户
-INSERT INTO monitor.m_users (username, password, status, created_time, updated_time, deleted_time) VALUES ('admin', '$2a$10$hKqAhWZqzMM7LeiFpLbWM.njlNcmLtHuO5HVv.R3/MGGYP4pp5CrC', 1, null, null, null);
+INSERT INTO go-admin.m_users (username, password, status, created_time, updated_time, deleted_time) VALUES ('admin', '$2a$10$hKqAhWZqzMM7LeiFpLbWM.njlNcmLtHuO5HVv.R3/MGGYP4pp5CrC', 1, null, null, null);

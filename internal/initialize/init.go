@@ -2,7 +2,7 @@ package initialize
 
 import (
 	"flag"
-	"monitor/internal/models"
+	"go-admin/internal/models"
 	"sync"
 )
 

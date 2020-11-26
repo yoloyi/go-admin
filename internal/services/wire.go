@@ -4,7 +4,7 @@ package services
 
 import (
 	"github.com/google/wire"
-	"monitor/internal/models/repositories"
+	"go-admin/internal/models/repositories"
 )
 
 func NewAuthService() *auth {

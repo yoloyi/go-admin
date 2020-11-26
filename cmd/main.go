@@ -1,8 +1,8 @@
 package main
 
 import (
-	"monitor/internal/initialize"
-	"monitor/internal/routers"
+	"go-admin/internal/initialize"
+	"go-admin/internal/routers"
 )
 
 func init() {

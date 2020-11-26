@@ -2,7 +2,7 @@ package services
 
 import (
 	"github.com/google/wire"
-	"monitor/internal/models/repositories"
+	"go-admin/internal/models/repositories"
 )
 
 var AuthServiceWireSet = wire.NewSet(newAuthService)

@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 	"log"
-	"monitor/internal/configs"
+	"go-admin/internal/configs"
 	"net/url"
 	"time"
 )

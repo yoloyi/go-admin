@@ -6,7 +6,7 @@
 package repositories
 
 import (
-	"monitor/internal/models"
+	"go-admin/internal/models"
 )
 
 // Injectors from wire.go:

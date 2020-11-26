@@ -2,9 +2,9 @@ package initialize
 
 import (
 	"flag"
+	"go-admin/internal/configs"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"monitor/internal/configs"
 	"os"
 )
 
