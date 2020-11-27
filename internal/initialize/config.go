@@ -5,6 +5,7 @@ import (
 	"go-admin/internal/configs"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"log"
 	"os"
 )
 
@@ -17,14 +18,14 @@ func initConfigYml() {
 	config := new(configs.Config)
 	// 判断配置文件是否存在
 	if _, err := os.Stat(*configPath); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	fileStream, err := ioutil.ReadFile(*configPath)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	if err := yaml.Unmarshal(fileStream, config); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	configs.SetConfig(config)
 }

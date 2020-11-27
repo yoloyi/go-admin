@@ -12,9 +12,9 @@ import (
 
 // Injectors from wire.go:
 
-func NewAuthService() *auth {
+func NewAuthService() *Auth {
 	db := models.GetDB()
 	user := repositories.NewUser(db)
-	servicesAuth := newAuthService(user)
-	return servicesAuth
+	auth := NewAuth(user)
+	return auth
 }

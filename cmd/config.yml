@@ -1,5 +1,5 @@
 app:
-  name: monitor
+  name: go-admin
   debug: true
   env: local    # local, release, test
   log_path: ./cmd

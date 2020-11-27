@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	log "github.com/sirupsen/logrus"
 	"go-admin/internal/configs"
 	"go-admin/internal/routers/handlers"
 	middleware "go-admin/internal/routers/middlewares"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -24,9 +24,9 @@ func initRouter() *gin.Engine {
 	}
 
 	var router = gin.Default()
-	log.Printf("【App】use middleware cors\n")
+	log.Println("【App】use middleware cors")
 	router.Use(middleware.Cors())
-	log.Printf("Init middleware cors success\n")
+	log.Println("Init middleware cors success")
 	registerRouter(router)
 	return router
 

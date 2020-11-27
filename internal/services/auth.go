@@ -5,12 +5,12 @@ import (
 	"go-admin/internal/models/repositories"
 )
 
-var AuthServiceWireSet = wire.NewSet(newAuthService)
+var AuthServiceWireSet = wire.NewSet(NewAuth)
 
-type auth struct {
+type Auth struct {
 	userRepository *repositories.User
 }
 
-func newAuthService(userRepository *repositories.User) *auth {
-	return &auth{userRepository: userRepository}
+func NewAuth(userRepository *repositories.User) *Auth {
+	return &Auth{userRepository: userRepository}
 }
