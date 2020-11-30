@@ -1,7 +1,7 @@
 app:
   name: go-admin
   debug: true
-  env: local    # local, release, test
+  env: local    # local, release, tests
   log_path: ./cmd
   port: 8000
 db:

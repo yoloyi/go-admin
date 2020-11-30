@@ -1,4 +1,4 @@
-.PHONY: start
+.PHONY: start, wire
 
 start:
 	go run ./cmd/main.go --c ./cmd/config.yml

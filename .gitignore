@@ -3,3 +3,4 @@ tests/*
 ./main
 *.log
 vendor/*
+/tmp
