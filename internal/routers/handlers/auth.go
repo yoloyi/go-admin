@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type auth struct {
@@ -9,6 +10,7 @@ type auth struct {
 
 func (a *auth) loginHandler() gin.HandlerFunc {
 	return func(context *gin.Context) {
+		context.JSON(http.StatusUnauthorized, gin.H{})
 	}
 }
 
