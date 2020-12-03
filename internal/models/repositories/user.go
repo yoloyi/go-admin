@@ -2,9 +2,9 @@ package repositories
 
 import (
 	"github.com/google/wire"
-	"gorm.io/gorm"
 	"go-admin/internal/models"
 	"go-admin/internal/models/entities"
+	"gorm.io/gorm"
 )
 
 var UserRepositoryWireSet = wire.NewSet(NewUser, models.GetDB)

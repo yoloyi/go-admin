@@ -8,13 +8,16 @@ package services
 import (
 	"go-admin/internal/models"
 	"go-admin/internal/models/repositories"
+	"go-admin/internal/services/auth"
+	auth2 "go-admin/internal/utils/auth"
 )
 
 // Injectors from wire.go:
 
-func NewAuthService() *Auth {
+func NewAuthService() *auth.Service {
 	db := models.GetDB()
 	user := repositories.NewUser(db)
-	auth := NewAuth(user)
-	return auth
+	authAuth := auth2.NewAuth()
+	auth3 := auth.NewAuth(user, authAuth)
+	return auth3
 }

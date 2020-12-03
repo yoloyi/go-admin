@@ -5,9 +5,10 @@ package services
 import (
 	"github.com/google/wire"
 	"go-admin/internal/models/repositories"
+	"go-admin/internal/services/auth"
 )
 
-func NewAuthService() *Auth {
-	wire.Build(AuthServiceWireSet, repositories.UserRepositoryWireSet)
-	return &Auth{}
+func NewAuthService() *auth.Service {
+	wire.Build(auth.ServiceWireSet, repositories.UserRepositoryWireSet)
+	return &auth.Service{}
 }

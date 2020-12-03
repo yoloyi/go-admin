@@ -1,52 +1,56 @@
 package response
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
+	"go-admin/internal/utils/response/e"
 )
 
-const (
-	NoErrorCode = 0
-)
+type Response struct {
+	c *gin.Context
+}
+
+func NewResponse(c *gin.Context) *Response {
+	return &Response{c: c}
+}
+
+func (r *Response) Success(httpCode int, data interface{}) {
+	var apiResponse = OkResponse(data)
+	r.c.JSON(httpCode, apiResponse.ToH())
+	return
+}
+
+func (r *Response) Error(httpCode, error int, data interface{}) {
+	var apiResponse = ErrorResponse(error, data, e.CodeToMessage(error))
+	r.c.JSON(httpCode, apiResponse.ToH())
+	return
+}
 
 type ApiResponse struct {
-	Code    uint
+	Error   int
 	Data    interface{}
 	Message string
 }
 
-func (requestError *ApiResponse) Error() string {
-	return fmt.Sprintf("Code：%d, Error message: %s", requestError.Code, requestError.Message)
-}
-
 func (requestError *ApiResponse) ToH() gin.H {
 	return gin.H{
-		"code":    requestError.Code,
+		"error":   requestError.Error,
 		"data":    requestError.Data,
 		"message": requestError.Message,
 	}
 }
 
-func NewRequestError(code uint, data interface{}, message string) *ApiResponse {
+func NewApiResponse(error int, data interface{}, message string) *ApiResponse {
 	return &ApiResponse{
-		Code:    code,
+		Error:   error,
 		Data:    data,
 		Message: message,
 	}
 }
 
-func Ok(data interface{}, msg string) *ApiResponse {
-	return NewRequestError(NoErrorCode, data, msg)
+func OkResponse(data interface{}) *ApiResponse {
+	return NewApiResponse(e.SuccessErrorCode, data, e.CodeToMessage(e.SuccessErrorCode))
 }
 
-func Error(code uint, data interface{}, msg string) *ApiResponse {
-	return NewRequestError(code, data, msg)
-}
-
-func OkH(data interface{}, msg string) gin.H {
-	return Ok(data, msg).ToH()
-}
-
-func ErrorH(code uint, data interface{}, msg string) gin.H {
-	return NewRequestError(code, data, msg).ToH()
+func ErrorResponse(error int, data interface{}, msg string) *ApiResponse {
+	return NewApiResponse(error, data, msg)
 }
