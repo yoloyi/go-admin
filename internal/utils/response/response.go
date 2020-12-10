@@ -25,6 +25,12 @@ func (r *Response) Error(httpCode, error int, data interface{}) {
 	return
 }
 
+func (r *Response) ErrorWithMessage(httpCode, error int, message string, data interface{}) {
+	var apiResponse = ErrorResponse(error, data, message)
+	r.c.JSON(httpCode, apiResponse.ToH())
+	return
+}
+
 type ApiResponse struct {
 	Error   int
 	Data    interface{}

@@ -7,9 +7,9 @@ const http = axios.create(
 	}
 )
 
-http.interceptors.response.use(function (response) {
+http.interceptors.response.use(response => {
 	return response;
-}, function (error) {
+}, error => {
 	if (error.response.status === 401) {
 		console.log(123)
 	}

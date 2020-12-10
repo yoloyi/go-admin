@@ -1,8 +1,11 @@
 package auth
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
 	"go-admin/internal/models/repositories"
+	"go-admin/internal/routers/requests"
+	auth2 "go-admin/internal/routers/requests/auth"
 	authUtil "go-admin/internal/utils/auth"
 )
 
@@ -20,6 +23,10 @@ func NewAuth(userRepository *repositories.User, authUtil *authUtil.Auth) *Servic
 	}
 }
 
-func (auth *Service) LoginService() {
-
+func (auth *Service) LoginService(ctx *gin.Context) {
+	var loginRequest auth2.LoginRequest
+	ctx.BindJSON(&loginRequest)
+	if !requests.Validate(ctx, loginRequest) {
+		return
+	}
 }

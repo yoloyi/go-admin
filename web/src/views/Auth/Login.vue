@@ -45,8 +45,6 @@ export default {
         username: "",
         password: "",
       },
-
-      // 表单验证，需要在 el-form-item 元素中增加 prop 属性
       rules: {
         username: [
           {
@@ -69,7 +67,9 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          http.get("/auth/login");
+          http.post("/auth/login", this.form).then(function (response) {
+            console.log(response);
+          });
         } else {
           return false;
         }
