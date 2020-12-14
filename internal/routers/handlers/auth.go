@@ -20,5 +20,8 @@ func RegisterAuthRouter(router *gin.RouterGroup) {
 	r := router.Group("auth")
 	{
 		r.POST("login", auth.loginHandler())
+		r.GET("login", func(context *gin.Context) {
+			
+		})
 	}
 }

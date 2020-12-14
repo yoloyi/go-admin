@@ -26,6 +26,6 @@ func (u *User) Create(users *entities.User) error {
 func (u *User) GetUserByUserName(username string) (*entities.User, error) {
 	user := &entities.User{}
 	err := u.db.Where("username = ?", username).First(user).Error
-
+	
 	return user, err
 }

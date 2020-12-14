@@ -25,7 +25,7 @@ func initRouter() *gin.Engine {
 
 	var router = gin.Default()
 	log.Println("【App】use middleware cors")
-	router.Use(middleware.Cors())
+	router.Use(middleware.Cors(), middleware.Trim())
 	log.Println("Init middleware cors success")
 	registerRouter(router)
 	return router

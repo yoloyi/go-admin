@@ -1,21 +1,23 @@
 import axios from 'axios';
 
+import { API_TIMEOUT } from "@/utils/env.js";
+
 const http = axios.create(
 	{
-		baseURL: process.env.VUE_APP_API_URL,
-		timeout: process.env.VUE_APP_API_TIMEOUT
+		timeout: API_TIMEOUT,
 	}
 )
 
 http.interceptors.response.use(response => {
 	return response;
 }, error => {
-	if (error.response.status === 401) {
-		console.log(123)
+	if (error.response) {
+		console.log(error)
 	}
 	// 对响应错误做点什么
 	return Promise.reject(error);
 });
+
 
 export default http
 

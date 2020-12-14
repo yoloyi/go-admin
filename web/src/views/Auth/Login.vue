@@ -35,8 +35,7 @@
 </template>
 
 <script>
-import http from "@/utils/http.js";
-
+import * as auth from "@/services/auth.js";
 export default {
   name: "Login",
   data() {
@@ -67,9 +66,11 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          http.post("/auth/login", this.form).then(function (response) {
-            console.log(response);
-          });
+          auth
+            .userLogin(this.form.username, this.form.password)
+            .then(function (response) {
+              console.log(response);
+            });
         } else {
           return false;
         }

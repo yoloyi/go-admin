@@ -7,3 +7,8 @@ type User struct {
 	Status   int8   `gorm:"column:status;type:tinyint(1);not null"`                               // 状态
 	BaseEntity
 }
+
+const (
+	UserStatusNormal = iota  // 正常用户
+	UserForbidden    = iota  // 禁用
+)
