@@ -15,7 +15,6 @@ import (
 )
 
 func initRouter() *gin.Engine {
-
 	// 当 env 不为 release 则统一为 debug 环境
 	if configs.GetAppConfig().GetEnv() != gin.ReleaseMode {
 		gin.SetMode(gin.DebugMode)

@@ -15,17 +15,17 @@ type IDbConfig interface {
 }
 
 type DbConfig struct {
-	Engine       string `yaml: "engine"`
-	Host         string `yaml: "host"`
-	Port         int    `yaml: "port"`
-	User         string `yaml: "user"`
-	Password     string `yaml: "password"`
-	Database     string `yaml: "database"`
-	Prefix       string `yaml: "prefix"`
-	Charset      string `yaml: "charset"`
-	MaxIdleConns int    `yaml: "maxidleconns"`
-	MaxOpenConns int    `yaml: "maxopenconns"`
-	Loc          string `yaml: "loc"`
+	Engine       string `yaml:"engine"`
+	Host         string `yaml:"host"`
+	Port         int    `yaml:"port"`
+	User         string `yaml:"user"`
+	Password     string `yaml:"password"`
+	Database     string `yaml:"database"`
+	Prefix       string `yaml:"prefix"`
+	Charset      string `yaml:"charset"`
+	MaxIdleConns int    `yaml:"maxidleconns"`
+	MaxOpenConns int    `yaml:"maxopenconns"`
+	Loc          string `yaml:"loc"`
 }
 
 func (d *DbConfig) GetDbEngine() string {

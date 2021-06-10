@@ -9,6 +9,6 @@ type User struct {
 }
 
 const (
-	UserStatusNormal = iota  // 正常用户
-	UserForbidden    = iota  // 禁用
+	UserStatusNormal = 0 // 正常用户
+	UserForbidden    = 1 // 禁用
 )

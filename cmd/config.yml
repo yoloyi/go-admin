@@ -2,7 +2,7 @@ app:
   name: go-admin
   key: 1234sdsffsdgfnhgfdsadsgytafsdvzbhytraf
   debug: true
-  env: local    # local, release, tests
+  env: local    # local, release, test
   log_path: ./cmd
   port: 8000
 db:
