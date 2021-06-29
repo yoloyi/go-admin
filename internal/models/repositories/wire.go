@@ -4,7 +4,7 @@ package repositories
 
 import "github.com/google/wire"
 
-func NewUserRepository() *User {
+func NewUserRepository() User {
 	wire.Build(UserRepositoryWireSet)
-	return &User{}
+	return User{}
 }

@@ -8,7 +8,7 @@ import (
 	"go-admin/internal/services/auth"
 )
 
-func NewAuthService() *auth.Service {
+func NewAuthService() auth.Service {
 	wire.Build(auth.ServiceWireSet, repositories.UserRepositoryWireSet)
-	return &auth.Service{}
+	return auth.Service{}
 }

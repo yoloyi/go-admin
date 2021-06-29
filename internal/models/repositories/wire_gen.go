@@ -11,7 +11,7 @@ import (
 
 // Injectors from wire.go:
 
-func NewUserRepository() *User {
+func NewUserRepository() User {
 	db := models.GetDB()
 	user := NewUser(db)
 	return user

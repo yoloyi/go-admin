@@ -9,30 +9,29 @@ import (
 	"go-admin/internal/models/repositories"
 	"go-admin/internal/routers/requests"
 	auth2 "go-admin/internal/routers/requests/auth"
+	"go-admin/internal/routers/response/auth"
 	authUtil "go-admin/internal/utils/auth"
 	"go-admin/internal/utils/response"
 	"go-admin/internal/utils/response/e"
 	"gorm.io/gorm"
-	"net/http"
 	"time"
 )
 
 var ServiceWireSet = wire.NewSet(NewAuth, authUtil.NewAuth)
 
 type Service struct {
-	userRepository *repositories.User
-	authUtil       *authUtil.Auth
+	userRepository repositories.User
+	authUtil       authUtil.Auth
 }
 
-func NewAuth(userRepository *repositories.User, authUtil *authUtil.Auth) *Service {
-	return &Service{
+func NewAuth(userRepository repositories.User, authUtil authUtil.Auth) Service {
+	return Service{
 		userRepository: userRepository,
 		authUtil:       authUtil,
 	}
 }
 
-func (this *Service) LoginService(ctx *gin.Context) {
-
+func (this Service) LoginService(ctx *gin.Context) {
 	var loginRequest auth2.LoginRequest
 	ctx.BindJSON(&loginRequest)
 
@@ -45,21 +44,21 @@ func (this *Service) LoginService(ctx *gin.Context) {
 	if err != nil {
 		// 用户不存在
 		if err == gorm.ErrRecordNotFound {
-			r.Error(http.StatusOK, e.UserNameOrPasswordNotMatch, nil)
+			r.HttpOkError(e.UserNameOrPasswordNotMatch, nil)
 			return
 		}
-		log.Errorf("登录查询用户错误", err)
-		r.Error(http.StatusOK, e.FaultErrorCode, nil)
+		log.Error("登录查询用户错误", err)
+		r.HttpOkError(e.FaultErrorCode, nil)
 		return
 	}
 	// 验证密码是否正确
 	if !this.authUtil.PasswordVerify(loginRequest.Password, user.Password) {
-		r.Error(http.StatusOK, e.UserNameOrPasswordNotMatch, nil)
+		r.HttpOkError(e.UserNameOrPasswordNotMatch, nil)
 		return
 	}
 
 	if user.Status != entities.UserStatusNormal {
-		r.Error(http.StatusOK, e.UsesAbnormal, nil)
+		r.HttpOkError(e.UsesAbnormal, nil)
 		return
 	}
 
@@ -67,9 +66,9 @@ func (this *Service) LoginService(ctx *gin.Context) {
 	jwtToken, err := jwtUtil.GenerateJwtToken(user.ID, 12*time.Hour)
 	if err != nil {
 		log.Errorf("登录生成 Token 异常", err)
-		r.Error(http.StatusOK, e.FaultErrorCode, nil)
+		r.HttpOkError(e.FaultErrorCode, nil)
 		return
 	}
 
-	r.Success(http.StatusOK, gin.H{"token": jwtToken})
+	r.HttpOkSuccess(auth.LoginResponse{Token: jwtToken})
 }

@@ -13,17 +13,17 @@ type User struct {
 	db *gorm.DB
 }
 
-func NewUser(db *gorm.DB) *User {
-	return &User{
+func NewUser(db *gorm.DB) User {
+	return User{
 		db: db,
 	}
 }
 
-func (u *User) Create(users *entities.User) error {
+func (u User) Create(users *entities.User) error {
 	return u.db.Create(users).Error
 }
 
-func (u *User) GetUserByUserName(username string) (*entities.User, error) {
+func (u User) GetUserByUserName(username string) (*entities.User, error) {
 	user := &entities.User{}
 	err := u.db.Where("username = ?", username).First(user).Error
 	

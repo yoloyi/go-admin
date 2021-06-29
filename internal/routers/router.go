@@ -2,10 +2,10 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 	"go-admin/internal/configs"
 	"go-admin/internal/routers/handlers"
 	middleware "go-admin/internal/routers/middlewares"
-	"log"
 )
 
 func InitRouter() *gin.Engine {
@@ -26,8 +26,16 @@ func InitRouter() *gin.Engine {
 
 // registerRouter register router handler
 func registerRouter(router *gin.Engine) {
-	routerGroup := router.Group("")
+	publicGroup := router.Group("")
+	{
+		handlers.RegisterAuthRouter(publicGroup) // 注册基础功能路由 不做鉴权
+	}
 
-	handlers.RegisterAuthRouter(routerGroup)
-	handlers.RegisterUserRouter(routerGroup)
+	privateRouterGroup := router.Group("")
+	privateRouterGroup.Use(middleware.JwtParser(), middleware.CheckPermission())
+	{
+		handlers.RegisterUserRouter(privateRouterGroup)
+	}
+
+	log.Info("router register success")
 }

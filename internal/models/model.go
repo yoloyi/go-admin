@@ -24,7 +24,7 @@ func SetUp() {
 		SkipDefaultTransaction: true,
 		NamingStrategy: schema.NamingStrategy{
 			TablePrefix:   configs.GetDbConfig().GetDbPrefix(),
-			SingularTable: false,
+			SingularTable: true,
 		},
 	})
 
