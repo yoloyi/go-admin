@@ -3,6 +3,7 @@ package response
 import (
 	"github.com/gin-gonic/gin"
 	"go-admin/internal/utils/response/e"
+	"net/http"
 )
 
 type Response struct {
@@ -19,9 +20,21 @@ func (r *Response) Success(httpCode int, data interface{}) {
 	return
 }
 
+func (r *Response) HttpOkSuccess(data interface{}) {
+	var apiResponse = OkResponse(data)
+	r.c.JSON(http.StatusOK, apiResponse.ToH())
+	return
+}
+
 func (r *Response) Error(httpCode, error int, data interface{}) {
 	var apiResponse = ErrorResponse(error, data, e.CodeToMessage(error))
 	r.c.JSON(httpCode, apiResponse.ToH())
+	return
+}
+
+func (r *Response) HttpOkError(error int, data interface{}) {
+	var apiResponse = ErrorResponse(error, data, e.CodeToMessage(error))
+	r.c.JSON(http.StatusOK, apiResponse.ToH())
 	return
 }
 
