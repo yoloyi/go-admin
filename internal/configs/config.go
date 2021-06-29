@@ -5,18 +5,24 @@ var (
 )
 
 type Config struct {
-	DbConfig  *DbConfig  `yaml:"db"`
-	AppConfig *AppConfig `yaml:"app"`
+	DbConfig  DbConfig  `yaml:"db" json:"db"`
+	AppConfig AppConfig `yaml:"app" json:"app"`
+	LogConfig LogConfig `yaml:"log" json:"log"`
 }
 
-// GetDbConfig 获取配置文件
+// GetDbConfig 获取配置
 func GetDbConfig() IDbConfig {
 	return config.DbConfig
 }
 
-// GetAppConfig 获取配置文件
+// GetAppConfig 获取配置
 func GetAppConfig() IAppConfig {
 	return config.AppConfig
+}
+
+// GetLogConfig 获取日志配置
+func GetLogConfig() ILogConfig {
+	return config.LogConfig
 }
 
 func SetConfig(c *Config) {

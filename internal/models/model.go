@@ -2,12 +2,11 @@ package models
 
 import (
 	"fmt"
+	"go-admin/internal/configs"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 	"log"
-	"go-admin/internal/configs"
-	"net/url"
 	"time"
 )
 
@@ -54,16 +53,16 @@ func GetDB() *gorm.DB {
 func getDsn() string {
 	var dsn string
 
-	switch configs.GetDbConfig().GetDbEngine() {
+	var dbConfig = configs.GetDbConfig()
+	switch dbConfig.GetDbEngine() {
 	case "mysql":
-		dsn = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=true&loc=%s",
-			configs.GetDbConfig().GetDbUser(),
-			configs.GetDbConfig().GetDbPassword(),
-			configs.GetDbConfig().GetDbHost(),
-			configs.GetDbConfig().GetDbPort(),
-			configs.GetDbConfig().GetDbDatabase(),
-			configs.GetDbConfig().GetDbCharset(),
-			url.QueryEscape(configs.GetDbConfig().GetLoc()),
+		dsn = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?%s",
+			dbConfig.GetDbUser(),
+			dbConfig.GetDbPassword(),
+			dbConfig.GetDbHost(),
+			dbConfig.GetDbPort(),
+			dbConfig.GetDbDatabase(),
+			dbConfig.GetExtra(),
 		)
 	default:
 		panic("不支持其他数据库")

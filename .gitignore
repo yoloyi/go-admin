@@ -3,6 +3,8 @@ tests/*
 ./main
 *.log
 vendor/*
-/tmp
+tmp/
 
 dist/*
+go.sum
+.DS_Store

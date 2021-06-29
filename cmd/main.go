@@ -2,13 +2,11 @@ package main
 
 import (
 	"go-admin/internal/initialize"
-	"go-admin/internal/routers"
+	"go-admin/internal/server"
 )
 
-func init() {
-	initialize.InitApp()
-}
-
 func main() {
-	routers.RunHttp()
+	initialize.InitApp()
+	
+	server.RunHttpServer()
 }

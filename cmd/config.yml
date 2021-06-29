@@ -3,17 +3,21 @@ app:
   key: 1234sdsffsdgfnhgfdsadsgytafsdvzbhytraf
   debug: true
   env: local    # local, release, test
-  log_path: ./cmd
   port: 8000
+
+log:
+  log_path: ./log
+  link_name: lastlog.log
+  show_line: true
+  level: trace
 db:
   engine: mysql
   host: 127.0.0.1
   port: 3306
+  database: monitor
   user: root
   password: 123456
-  database: monitor
-  prefix: m_
-  charset: utf8mb4
-  loc: Asia/Shanghai
-  maxidleconns: 20
-  maxopenconns: 50
+  extra: ?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  table_prefix: m_
+  max_idle_conns: 20
+  max_open_conns: 50
