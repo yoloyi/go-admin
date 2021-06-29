@@ -13,5 +13,5 @@ const (
 const (
 	// 2 开头为用户相关错误码
 	UserNameOrPasswordNotMatch = 20000
-	UsesAbnormal               = 20000
+	UsesAbnormal               = 20001
 )
