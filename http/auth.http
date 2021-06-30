@@ -1,0 +1,15 @@
+POST {{http}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
+
+
+
+
+###
+GET {{http}}/user/index
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MjUxMzQ0OTAsImlhdCI6MTYyNTA0ODA5MCwibmJmIjoxNjI1MDQ4MDkwfQ.s7JD_tV5U7Y-cl33JMG1AWB5yJezvnLi2MWEfzAn8lw

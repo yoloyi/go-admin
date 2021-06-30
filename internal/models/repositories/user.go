@@ -31,8 +31,8 @@ func (u User) GetUserByUserName(username string) (entities.User, error) {
 	return user, err
 }
 
-func (u User) First(id ...interface{}) (entities.User, error) {
+func (u User) First(conds ...interface{}) (entities.User, error) {
 	user := entities.User{}
-	err := u.db.First(&user, id).Error
+	err := u.db.First(&user, conds...).Error
 	return user, err
 }
