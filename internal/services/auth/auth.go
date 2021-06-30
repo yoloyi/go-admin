@@ -5,7 +5,6 @@ import (
 	"github.com/google/wire"
 	log "github.com/sirupsen/logrus"
 	"go-admin/internal/configs"
-	"go-admin/internal/models/entities"
 	"go-admin/internal/models/repositories"
 	"go-admin/internal/routers/requests"
 	auth2 "go-admin/internal/routers/requests/auth"
@@ -57,15 +56,16 @@ func (this Service) LoginService(ctx *gin.Context) {
 		return
 	}
 
-	if user.Status != entities.UserStatusNormal {
+	// 判断用户是否为正常用户
+	if !user.CheckUserNormal() {
 		r.HttpOkError(e.UsesAbnormal, nil)
 		return
 	}
 
 	var jwtUtil = authUtil.NewJwt(configs.GetAppConfig().GetKey())
-	jwtToken, err := jwtUtil.GenerateJwtToken(user.ID, 12*time.Hour)
+	jwtToken, err := jwtUtil.GenerateUserJwtToken(user.ID, 24*time.Hour)
 	if err != nil {
-		log.Errorf("登录生成 Token 异常", err)
+		log.Error("登录生成 Token 异常", err)
 		r.HttpOkError(e.FaultErrorCode, nil)
 		return
 	}

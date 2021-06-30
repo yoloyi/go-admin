@@ -7,7 +7,7 @@ import (
 
 func TestNewJwt(t *testing.T) {
 	jwtUtil := NewJwt("123123123123")
-	token, err := jwtUtil.generateJwtToken(123, 10*time.Hour)
+	token, err := jwtUtil.GenerateUserJwtToken(123, 10*time.Hour)
 	if err != nil {
 		t.Error(err)
 	}
@@ -16,7 +16,7 @@ func TestNewJwt(t *testing.T) {
 
 func TestJwt_ParseJwtToken(t *testing.T) {
 	jwtUtil := NewJwt("123123123123")
-	token, err := jwtUtil.generateJwtToken(123, 1*time.Second)
+	token, err := jwtUtil.GenerateUserJwtToken(123, 1*time.Second)
 	if err != nil {
 		t.Error(err)
 	}

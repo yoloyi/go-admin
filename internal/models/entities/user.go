@@ -12,3 +12,9 @@ const (
 	UserStatusNormal = 0 // 正常用户
 	UserForbidden    = 1 // 禁用
 )
+
+// CheckUserNormal 判断用户是否为正常用户
+
+func (u User) CheckUserNormal() bool {
+	return u.Status == UserStatusNormal
+}

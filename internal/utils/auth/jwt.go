@@ -14,7 +14,8 @@ type JwtClaims struct {
 	jwt.StandardClaims
 }
 
-func (this *Jwt) GenerateJwtToken(userId uint, expireDuration time.Duration) (string, error) {
+// GenerateUserJwtToken 生成用户JWT Token
+func (this Jwt) GenerateUserJwtToken(userId uint, expireDuration time.Duration) (string, error) {
 	now := time.Now()
 	nowTimeStamp := now.Unix()
 	jwtClaim := JwtClaims{
@@ -25,12 +26,19 @@ func (this *Jwt) GenerateJwtToken(userId uint, expireDuration time.Duration) (st
 			IssuedAt:  nowTimeStamp,
 		},
 	}
+
+	return this.GenerateJwtToken(jwtClaim)
+}
+
+//GenerateJwtToken  生成JWT Token
+func (this Jwt) GenerateJwtToken(jwtClaim JwtClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwtClaim)
 	ss, err := token.SignedString([]byte(this.key))
 	return ss, err
 }
 
-func (this *Jwt) ParseJwtToken(jwtToken string) (*JwtClaims, error) {
+// ParseJwtToken 解析 JWT Token
+func (this Jwt) ParseJwtToken(jwtToken string) (*JwtClaims, error) {
 	token, err := jwt.ParseWithClaims(jwtToken, new(JwtClaims), func(token *jwt.Token) (interface{}, error) {
 		return []byte(this.key), nil
 	})
@@ -41,9 +49,10 @@ func (this *Jwt) ParseJwtToken(jwtToken string) (*JwtClaims, error) {
 	if claims, ok := token.Claims.(*JwtClaims); ok && token.Valid {
 		return claims, nil
 	}
+
 	return nil, jwt.ErrSignatureInvalid
 }
 
-func NewJwt(key string) *Jwt {
-	return &Jwt{key: key}
+func NewJwt(key string) Jwt {
+	return Jwt{key: key}
 }

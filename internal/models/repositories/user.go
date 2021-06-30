@@ -19,13 +19,20 @@ func NewUser(db *gorm.DB) User {
 	}
 }
 
-func (u User) Create(users *entities.User) error {
+// Create 创建用户
+func (u User) Create(users entities.User) error {
 	return u.db.Create(users).Error
 }
 
-func (u User) GetUserByUserName(username string) (*entities.User, error) {
-	user := &entities.User{}
-	err := u.db.Where("username = ?", username).First(user).Error
-	
+func (u User) GetUserByUserName(username string) (entities.User, error) {
+	user := entities.User{}
+	err := u.db.Where("username = ?", username).First(&user).Error
+
+	return user, err
+}
+
+func (u User) First(id ...interface{}) (entities.User, error) {
+	user := entities.User{}
+	err := u.db.First(&user, id).Error
 	return user, err
 }
