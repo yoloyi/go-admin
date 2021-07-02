@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"go-admin/internal/configs"
+	"go-admin/internal/routers/handlers"
 	"go-admin/internal/routers/handlers/v1"
 	middleware "go-admin/internal/routers/middlewares"
 )
@@ -26,9 +27,11 @@ func InitRouter() *gin.Engine {
 
 // registerRouter register router handler
 func registerRouter(router *gin.Engine) {
+	// 不做鉴权
 	publicGroup := router.Group("")
 	{
-		v1.RegisterAuthRouter(publicGroup) // 注册基础功能路由 不做鉴权
+		handlers.RegisterBasicRouter(publicGroup) // 注册基础功能路由
+		v1.RegisterAuthRouter(publicGroup)        // 注册 Auth 权益
 	}
 
 	privateRouterGroup := router.Group("")

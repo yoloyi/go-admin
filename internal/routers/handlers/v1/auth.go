@@ -8,7 +8,7 @@ import (
 type auth struct {
 }
 
-func (a *auth) loginHandler() gin.HandlerFunc {
+func (a auth) loginHandler() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		authService := services.NewAuthService()
 		authService.LoginService(context)
