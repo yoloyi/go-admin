@@ -8,6 +8,7 @@ import (
 type auth struct {
 }
 
+// loginHandler 用户登录 Handler
 func (a auth) loginHandler() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		authService := services.NewAuthService()
@@ -20,8 +21,5 @@ func RegisterAuthRouter(router *gin.RouterGroup) {
 	r := router.Group("auth")
 	{
 		r.POST("login", auth.loginHandler())
-		r.GET("login", func(context *gin.Context) {
-			
-		})
 	}
 }

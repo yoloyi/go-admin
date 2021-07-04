@@ -14,7 +14,7 @@ db:
   engine: mysql
   host: 127.0.0.1
   port: 3306
-  database: monitor
+  database: go_admin
   user: root
   password: 123456
   extra: "charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai"

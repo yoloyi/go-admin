@@ -17,9 +17,9 @@ func InitRouter() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	var router = gin.Default()
+	var router = gin.New()
 	log.Println("【App】use middleware cors")
-	router.Use(middleware.Cors(), middleware.Trim())
+	router.Use(gin.Logger(), middleware.GinRecovery())
 	log.Println("Init middleware cors success")
 	registerRouter(router)
 	return router
@@ -27,6 +27,9 @@ func InitRouter() *gin.Engine {
 
 // registerRouter register router handler
 func registerRouter(router *gin.Engine) {
+
+	router.Use(middleware.Cors()) // 跨域
+
 	// 不做鉴权
 	publicGroup := router.Group("")
 	{
@@ -34,6 +37,7 @@ func registerRouter(router *gin.Engine) {
 		v1.RegisterAuthRouter(publicGroup)        // 注册 Auth 权益
 	}
 
+	// 鉴权需要登录
 	privateRouterGroup := router.Group("")
 	privateRouterGroup.Use(middleware.JwtAuth(), middleware.CheckPermission())
 	{

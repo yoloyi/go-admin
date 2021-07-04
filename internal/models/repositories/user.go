@@ -10,29 +10,31 @@ import (
 var UserRepositoryWireSet = wire.NewSet(NewUser, models.GetDB)
 
 type User struct {
-	db *gorm.DB
+	DB *gorm.DB
 }
 
 func NewUser(db *gorm.DB) User {
 	return User{
-		db: db,
+		DB: db,
 	}
 }
 
 // Create 创建用户
 func (u User) Create(users entities.User) error {
-	return u.db.Create(users).Error
+	return u.DB.Create(users).Error
 }
 
 func (u User) GetUserByUserName(username string) (entities.User, error) {
 	user := entities.User{}
-	err := u.db.Where("username = ?", username).First(&user).Error
+	err := u.DB.Where("username = ?", username).First(&user).Error
 
 	return user, err
 }
 
 func (u User) First(conds ...interface{}) (entities.User, error) {
 	user := entities.User{}
-	err := u.db.First(&user, conds...).Error
+	err := u.DB.First(&user, conds...).Error
 	return user, err
 }
+
+

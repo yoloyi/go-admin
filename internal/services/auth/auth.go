@@ -50,8 +50,9 @@ func (this Service) LoginService(ctx *gin.Context) {
 		r.HttpOkError(e.FaultErrorCode, nil)
 		return
 	}
+
 	// 验证密码是否正确
-	if !this.authUtil.PasswordVerify(loginRequest.Password, user.Password) {
+	if !user.CheckPasswordValid(loginRequest.Password) {
 		r.HttpOkError(e.UserNameOrPasswordNotMatch, nil)
 		return
 	}

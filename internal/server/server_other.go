@@ -13,6 +13,8 @@ func initServer(address string, router *gin.Engine) server {
 	s.ReadHeaderTimeout = 10 * time.Millisecond
 	s.WriteTimeout = 10 * time.Second
 	s.MaxHeaderBytes = 1 << 20
+	s.BeforeBegin = func(add string) {
 
+	}
 	return s
 }

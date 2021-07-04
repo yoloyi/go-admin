@@ -1,0 +1,15 @@
+PATCH {{http}}/user/changePassword
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2MjU0Njc0OTgsImlhdCI6MTYyNTM4MTA5OCwibmJmIjoxNjI1MzgxMDk4fQ.hHCuQU6q132iVreyUE-vUxV3P7h09lPxj5okMVi0u2M
+
+{
+  "old_password": "123467",
+  "password": "123456",
+  "repeat_password": "123456"
+}
+
+
+
+
+
+

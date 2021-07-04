@@ -4,6 +4,7 @@ tests/*
 *.log
 vendor/*
 tmp/
+config.yml
 
 dist/*
 go.sum
